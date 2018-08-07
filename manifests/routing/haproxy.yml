@@ -38,7 +38,6 @@ instance_groups:
         release: haproxy
         properties:
           ha_proxy:
-            backend_servers: (( grab instance_groups.router.networks[0].static_ips ))
             internal_only_domains: (( grab params.internal_only_domains ))
             trusted_domain_cidrs:  (( grab params.trusted_domain_cidrs ))
             ssl_pem: ~
