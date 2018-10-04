@@ -16,6 +16,10 @@ ask_for_haproxy() {
   case $cert in
   generate)
     # the kit.yml will generate the cert
+    prompt_for skip_ssl select \
+      'When using self-signed you may need to skip SSL validation or Smoke Tests and other action will fail' \
+      -o '[yes] Yes, I want to set skip_ssl_validation' \
+      -o '[no]  No, do not set skip_ssl_validation, I will make required changes myself'
     ;;
 
   provide)
@@ -253,6 +257,10 @@ echo "  env:   $GENESIS_ENVIRONMENT"
 echo
 echo "  # Cloud Foundry base domain"
 echo "  base_domain: $base_domain"
+
+if [[ $skip_ssl == 'yes' ]]; then
+  echo "  skip_ssl_validation: true"
+fi
 
 case $use_db in
 mysql-db)
