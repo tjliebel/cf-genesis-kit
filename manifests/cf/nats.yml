@@ -20,6 +20,6 @@ instance_groups:
         monitor_port: 9222
         prof_port:    0
         port:         4222
-
+        
         user:     nats_user
         password: (( vault meta.vault "/nats:password" ))
