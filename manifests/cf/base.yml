@@ -104,8 +104,7 @@ instance_groups:
     instances: (( grab params.router_instances ))
     vm_type: (( grab params.router_vm_type ))
     vm_extensions:
-      - cf-elb
-      - ssh-elb
+      - cf-load-balanced
     azs: (( grab params.availability_zones || meta.default.azs ))
     stemcell: default
     networks:

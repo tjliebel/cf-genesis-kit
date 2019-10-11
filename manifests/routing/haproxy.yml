@@ -22,8 +22,7 @@ instance_groups:
         static_ips: (( static_ips 10 11 12 13 14 ))
 
     vm_extensions:
-      - cf-elb
-      - ssh-elb
+      - cf-load-balanced
 
     jobs:
       - name: haproxy

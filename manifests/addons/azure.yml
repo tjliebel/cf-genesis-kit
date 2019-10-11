@@ -38,7 +38,7 @@ instance_groups:
 
   - name: router
     vm_extensions:
-      - (( replace ))  # force replace to remove the cf-elb extension
+      - (( replace ))  # force replace to remove the cf-load-balanced vm extension
       - router_as
 
   - name: bbs
