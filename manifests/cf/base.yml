@@ -54,7 +54,6 @@ params:
   router_instances:      2
   bbs_instances:         2
   diego_instances:       2
-  access_instances:      2
   cell_instances:        3
   syslogger_instances:   2
 
@@ -68,7 +67,6 @@ params:
   router_vm_type:      small
   bbs_vm_type:         small
   diego_vm_type:       medium
-  access_vm_type:      small
   cell_vm_type:        runtime
   errand_vm_type:      small
   syslogger_vm_type:   small
@@ -102,6 +100,17 @@ params:
   autoscaler_network: cf-autoscaler
 
 instance_groups:
+  - name: router
+    instances: (( grab params.router_instances ))
+    vm_type: (( grab params.router_vm_type ))
+    vm_extensions:
+      - cf-elb
+      - ssh-elb
+    azs: (( grab params.availability_zones || meta.default.azs ))
+    stemcell: default
+    networks:
+      - name: (( grab params.cf_edge_network ))
+
   - name: nats
     instances: (( grab params.nats_instances ))
     vm_type: (( grab params.nats_vm_type ))
@@ -154,16 +163,6 @@ instance_groups:
     migrated_from:
     - name: log-api
 
-  - name: router
-    instances: (( grab params.router_instances ))
-    vm_type: (( grab params.router_vm_type ))
-    vm_extensions:
-    - cf-elb
-    azs: (( grab params.availability_zones || meta.default.azs ))
-    stemcell: default
-    networks:
-    - name: (( grab params.cf_edge_network ))
-
   - name: bbs
     instances: (( grab params.bbs_instances ))
     vm_type: (( grab params.bbs_vm_type ))
@@ -181,18 +180,6 @@ instance_groups:
     stemcell: default
     networks:
       - name: (( grab params.cf_internal_network ))
-
-  - name: access
-    instances: (( grab params.access_instances ))
-    vm_type: (( grab params.access_vm_type ))
-    azs: (( grab params.availability_zones || meta.default.azs ))
-    stemcell: default
-    networks:
-      - name: (( grab params.cf_edge_network ))
-    vm_extensions:
-      - ssh-elb
-    migrated_from:
-      - name: diego-brain
 
   - name: cell
     instances: (( grab params.cell_instances ))

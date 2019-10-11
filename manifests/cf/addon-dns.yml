@@ -65,7 +65,7 @@ addons:
             - domain: file-server.service.cf.internal
               targets:
                 - .: (( inject meta.dns.query ))
-                  instance_group: access
+                  instance_group: api
                   network: (( grab params.cf_edge_network ))
 
             - domain: gorouter.service.cf.internal
@@ -113,7 +113,7 @@ addons:
             - domain: ssh-proxy.service.cf.internal
               targets:
                 - .: (( inject meta.dns.query ))
-                  instance_group: access
+                  instance_group: router
                   network: (( grab params.cf_edge_network ))
 
             - domain: tps.service.cf.internal

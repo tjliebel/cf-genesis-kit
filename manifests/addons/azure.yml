@@ -51,11 +51,6 @@ instance_groups:
       - (( append ))
       - diego_as
 
-  - name: access
-    vm_extensions:
-      - (( append ))
-      - access_as
-
   - name: cell
     vm_extensions:
       - (( append ))
