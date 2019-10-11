@@ -1,9 +1,6 @@
 ---
 instance_groups:
   - name: router
-    migrated_from:
-      - name: access
-
     jobs:
       - name: gorouter
         release: routing
