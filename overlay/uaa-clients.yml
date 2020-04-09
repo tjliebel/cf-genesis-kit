@@ -10,8 +10,15 @@ instance_groups:
             authorized-grant-types: client_credentials
             authorities: cloud_controller.read,cloud_controller.admin,uaa.resource
             secret:  "((uaa_clients_app_autoscaler_client_secret))"
+          firehose:
+            authorities: doppler.firehose,cloud_controller.admin
+            authorized-grant-types: client_credentials,refresh_token
+            scope: openid,oauth.approvals,scim.userids,cloud_controller.read
+            secret: "((uaa_clients_app_firehose_client_secret))"
 
 variables:
 - name: uaa_clients_app_autoscaler_client_secret
   type: password
-  
+- name: uaa_clients_app_firehose_client_secret
+  type: password
+

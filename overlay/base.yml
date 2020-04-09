@@ -1,6 +1,6 @@
 --- # overrides: basic overrides for genesis compatibility
 exodus:
-  #api_url:        (( concat "https://" meta.api_hostname ))
+  api_url:        (( concat "https://api." params.system_domain ))
   admin_username: admin
   #admin_password: (( vault meta.vault "/admin_user:password" ))
   system_domain:  (( grab params.system_domain ))
